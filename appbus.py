@@ -95,7 +95,7 @@ fig_3 = px.bar(
     trem_ou_nao, 
     x='trem_ou_nao', 
     y='Porcentagem', 
-    title='Percentual de Acesso a trem no município do Rio de Janeiro em 2022',
+    title='Percentual de Acesso a trem em 500m no município do Rio de Janeiro em 2022',
     labels={'trem_ou_nao': ' ', 'v0001': 'Total de pessoas'},
     category_orders={'trem_ou_nao': ['Com acesso', 'Sem acesso']}
 )
@@ -123,7 +123,7 @@ fig_4 = px.bar(
     onibus_15, 
     x='onibus_ou_nao', 
     y='Porcentagem', 
-    title='Percentual de Acesso a ônibus no município do Rio de Janeiro em 2022',
+    title='Percentual de Acesso a ônibus em 500m no município do Rio de Janeiro em 2022',
     labels={'onibus_ou_nao': 'Utiliza ônibus', 'Porcentagem': 'Porcentagem'}
 )
 
