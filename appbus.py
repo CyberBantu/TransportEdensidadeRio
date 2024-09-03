@@ -162,9 +162,63 @@ color_scale = ["#D32F2F", "#388E3C"]  # Vermelho e Verde, por exemplo
 # Mostrar o mapa no app Streamlit
 
 # Mapa 2 ---------
-# Criar o mapa
-# Definir uma escala de cores personalizada com duas cores
+# criando mapa de densidade populacional
+st.subheader('🏙️ Mapa de total populacional por Setor Censitário no Rio de Janeiro 🗺️\n\n')
 
+colorscale = [
+    [0, '#F7F7F7'],   # Cinza muito claro para valores muito baixos
+    [0.2, '#F2B5D4'], # Rosa claro para valores baixos
+    [0.4, '#F4A582'], # Laranja claro para valores intermediários
+    [0.6, '#F56F6F'], # Vermelho coral para valores mais altos
+    [0.8, '#D94F5F'], # Vermelho escuro para valores altos
+    [1, '#B30000']    # Vermelho muito escuro para valores muito altos
+]
+
+# Criando o mapa de densidade populacional
+map_3 = px.choropleth_mapbox(df,
+                             geojson=df.geometry,
+                             locations=df.index,
+                             color="v0001",
+                             mapbox_style="carto-positron",
+                             hover_name="densidade",
+                             hover_data={
+                                 "NM_SUBDIST": True,
+                                 "v0001": ":,.0f",
+                                 "densidade": ":,.2f",
+                                 "onibus": True,
+                                 # colocando a area
+                                    'AREA_KM2': True
+                             },
+                             labels={
+                                 "v0001": "Total da População",
+                                 "densidade": "Densidade (hab/km²)",
+                                 'onibus': 'Total de Ônibus',
+                                 'NM_SUBDIST': 'Subdistrito',
+                                 'AREA_KM2': 'Área (km²)'
+                             },
+                             center={"lat": -22.913732, "lon": -43.348177},
+                             zoom=10,
+                             opacity=0.7,
+                             color_continuous_scale=colorscale)  # Usar a paleta de cores personalizada
+
+# Ajustar layout
+map_3.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+
+# Melhorando os popups
+map_3.update_traces(
+    marker_line_width=0.01,
+    line=dict(width=0.01),
+    selector=dict(type='choropleth'),
+    hovertemplate='<b>Bairro: %{customdata[3]}</b><br><br>' +
+                  'Total de Ônibus: %{customdata[1]:,.0f}<br>' +
+                  'Densidade: %{customdata[2]:,.2f} hab/km²<br>' +
+                  'Total de Pessoas: %{customdata[0]:,.0f}<br>' +
+                  '<extra></extra>'
+)
+
+
+# Exibir o mapa no Streamlit
+st.plotly_chart(map_3)
 
 st.subheader('🚌 Mapa de Acesso a Ônibus a Menos de 500 Metros por Setor Censitário no Rio de Janeiro 🗺️\n\n')
 
@@ -247,4 +301,6 @@ map_2.update_traces(
 
 # Exibir o mapa no Streamlit
 st.plotly_chart(map_2)
+
+
 
