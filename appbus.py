@@ -14,7 +14,7 @@ st.title('📊 Análise do Território do Município do Rio de Janeiro')
 st.write("""
 **Bem-vindo ao aplicativo Streamlit desenvolvido para analisar o território do município do Rio de Janeiro, com foco na comparação e impacto do transporte público.** 
 
-Este projeto foi criado por **Christian Basilio Oliveira**, Gestor Público e Pós-graduando em Comunicação Política na ESPM.
+Este projeto foi criado por **Christian Basilio Oliveira**, Gestor Público pela UFRJ e Pós-graduando em Comunicação Política na ESPM.
 
 [LinkedIn](https://www.linkedin.com/in/christianbasilioo/).
 """)
